@@ -19,9 +19,27 @@ export interface ProductInfo {
   groundingUrls?: { title?: string; uri: string }[];
 }
 
+// Gera uma legenda persuasiva para Instagram/TikTok
+export async function generateMarketingCopy(productName: string, price: number): Promise<string> {
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  
+  const prompt = `Crie uma legenda curta, persuasiva e animada para o Instagram sobre o produto "${productName}" que custa R$ ${price}. 
+  Use emojis fitness, fale dos benefícios para o treino e inclua hashtags relevantes. Foque em conversão de vendas.`;
+
+  try {
+    const response = await ai.models.generateContent({
+      model: 'gemini-3-flash-preview',
+      contents: prompt,
+    });
+    return response.text || "Erro ao gerar legenda.";
+  } catch (error) {
+    console.error("Erro ao gerar copy:", error);
+    return "Não foi possível gerar a legenda no momento.";
+  }
+}
+
 // Syncs product price and availability using Google Search grounding
 export async function syncProductData(productName: string, currentPrice: number): Promise<LiveData> {
-  // Always create instance inside the function as per guidelines to ensure fresh API key
   const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   
   const prompt = `
@@ -49,7 +67,6 @@ export async function syncProductData(productName: string, currentPrice: number)
       },
     });
 
-    // Extract grounding URLs as per Search Grounding rules
     const groundingChunks = response.candidates?.[0]?.groundingMetadata?.groundingChunks;
     const groundingUrls = groundingChunks?.map((chunk: any) => ({
       title: chunk.web?.title,
@@ -67,7 +84,6 @@ export async function syncProductData(productName: string, currentPrice: number)
 
 // Fetches detailed product information from a search query or Amazon URL
 export async function fetchProductInfo(query: string): Promise<ProductInfo> {
-  // Always create instance inside the function as per guidelines to ensure fresh API key
   const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   
   const prompt = `Encontre informações detalhadas sobre o produto: "${query}" na Amazon Brasil. 
@@ -97,7 +113,6 @@ export async function fetchProductInfo(query: string): Promise<ProductInfo> {
       },
     });
 
-    // Extract grounding URLs as per Search Grounding rules
     const groundingChunks = response.candidates?.[0]?.groundingMetadata?.groundingChunks;
     const groundingUrls = groundingChunks?.map((chunk: any) => ({
       title: chunk.web?.title,

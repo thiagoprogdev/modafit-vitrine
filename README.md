@@ -1,51 +1,45 @@
 
 # 🚀 ModaFit Suplementos - Vitrine de Afiliados
 
-Sua landing page premium de alta conversão para afiliados.
+Sua vitrine inteligente está pronta! 🎉 O código já está no GitHub, agora vamos colocar o site no ar.
 
-## 🛠️ Guia de Comandos Git (Treinamento)
+## 🌍 Como fazer o Deploy (Site ao vivo)
 
-Use estes comandos no terminal do VS Code para manter seu site atualizado:
+Siga estes passos para o seu site ganhar um link real:
 
-### 1. Primeira vez (Setup)
-```bash
-# Iniciar o git na pasta
-git init
+1. Acesse o site da [Vercel](https://vercel.com).
+2. Faça login com sua conta do **GitHub**.
+3. Clique no botão **"Add New"** e depois em **"Project"**.
+4. Você verá uma lista dos seus repositórios. Clique em **"Import"** no `modafit-vitrine`.
+5. **PASSO CRUCIAL (Configuração):**
+   - Antes de clicar em Deploy, procure a seção **"Environment Variables"**.
+   - No campo **Key**, digite: `API_KEY`
+   - No campo **Value**, cole a sua chave do Gemini.
+   - Clique em **"Add"**.
+6. Clique em **"Deploy"**.
 
-# Adicionar todos os arquivos
-git add .
-
-# Criar o primeiro "ponto de salvamento"
-git commit -m "feat: lançamento da vitrine premium"
-
-# Conectar ao seu GitHub (Substitua o link abaixo pelo seu)
-git remote add origin https://github.com/SEU_USUARIO/modafit-vitrine.git
-git branch -M main
-
-# Enviar para a nuvem
-git push -u origin main
-```
-
-### 2. Rotina de Atualização (Quando você mudar um link ou preço)
-```bash
-# Adiciona as mudanças
-git add .
-
-# Descreve o que você mudou
-git commit -m "fix: atualizado link do whey protein"
-
-# Envia para o site (O Vercel atualizará o site sozinho!)
-git push
-```
-
-## 🌐 Deploy no Vercel
-
-1. Acesse [vercel.com](https://vercel.com) e conecte sua conta do GitHub.
-2. Clique em **"Add New" > "Project"**.
-3. Selecione o repositório `modafit-vitrine`.
-4. Em **Environment Variables**, adicione:
-   - `API_KEY`: Sua chave do Gemini (obtida em ai.google.dev).
-5. Clique em **Deploy**.
+Em menos de 1 minuto, a Vercel vai te dar um link (ex: `modafit-vitrine.vercel.app`) para você colocar na sua bio do Instagram!
 
 ---
-*Dica: Cada 'push' que você der no Git, o Vercel percebe e reconstrói seu site em segundos!*
+
+## ✨ O que seu site tem de especial?
+
+- **Legendas com IA**: Clique em um produto e gere copies de venda instantaneamente.
+- **Busca Inteligente**: Encontre qualquer produto da Amazon apenas colando o link.
+- **Design de Elite**: Layout focado em conversão e performance.
+- **Google Search Grounding**: Preços e informações sempre atualizados via Google.
+
+---
+
+## 🛠️ Comandos de Atualização (Git)
+
+Sempre que você mudar algo no código aqui no VS Code, faça isso para atualizar o site:
+
+1. `git add .`
+2. `git commit -m "feat: nova funcionalidade"`
+3. `git push`
+
+*A Vercel vai perceber o push e atualizar seu site sozinha em segundos!*
+
+---
+**Parabéns pelo progresso, Thiago! Você agora tem uma ferramenta de vendas profissional.** 🚀
