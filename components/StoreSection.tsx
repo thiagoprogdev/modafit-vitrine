@@ -66,7 +66,6 @@ const StoreSection: React.FC<StoreSectionProps> = ({
             <ProductCard 
                 key={product.id} 
                 product={product} 
-                // Removed accentColor and buttonColorClass as they are not defined in ProductCardProps
             />
           ))}
         </div>

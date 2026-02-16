@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Product, AffiliateSource } from '../types';
-import { Star, ChevronLeft, ChevronRight, ShoppingCart, Share2 } from 'lucide-react';
+import { Star, ShoppingCart, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface ProductCardProps {
   product: Product;
@@ -15,7 +15,7 @@ const SourceBadge = ({ source }: { source: AffiliateSource }) => {
   };
   const config = configs[source];
   return (
-    <span className={`text-[9px] font-black uppercase tracking-wider px-2 py-1 rounded-md shadow-sm ${config.color}`}>
+    <span className={`text-[9px] font-black uppercase tracking-wider px-2 py-1 rounded-md shadow-lg ${config.color}`}>
       {config.label}
     </span>
   );
@@ -23,7 +23,6 @@ const SourceBadge = ({ source }: { source: AffiliateSource }) => {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const [currentImg, setCurrentImg] = useState(0);
-  const [isExpanded, setIsExpanded] = useState(false);
 
   const nextImg = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -35,94 +34,52 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     setCurrentImg((prev) => (prev - 1 + product.imageUrls.length) % product.imageUrls.length);
   };
 
-  const handleShare = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (navigator.share) {
-      navigator.share({
-        title: product.title,
-        text: `Olha esse achadinho: ${product.title}`,
-        url: window.location.href, // Aqui você pode colocar o link direto do produto se preferir
-      }).catch(console.error);
-    } else {
-      navigator.clipboard.writeText(window.location.href);
-      alert('Link da página copiado!');
-    }
-  };
-
   return (
-    <div className="bg-white border border-slate-100 rounded-2xl overflow-hidden flex flex-col h-full hover:shadow-xl transition-all duration-300 group">
-      {/* Galeria */}
-      <div className="relative aspect-square bg-slate-50 group/gallery overflow-hidden">
+    <div className="bg-white border border-slate-100 rounded-[2rem] overflow-hidden flex flex-col h-full hover:shadow-2xl transition-all duration-500 group relative">
+      <div className="relative aspect-square bg-white group/gallery overflow-hidden">
         <img
           src={product.imageUrls[currentImg]}
           alt={product.title}
-          className="w-full h-full object-contain mix-blend-multiply p-4"
+          className="w-full h-full object-contain p-6 transition-all duration-700 group-hover:scale-105"
         />
         
         {product.imageUrls.length > 1 && (
-          <div className="absolute inset-0 flex items-center justify-between px-2 opacity-0 group-hover/gallery:opacity-100 transition-opacity">
-            <button onClick={prevImg} className="p-1 bg-white/90 rounded-full shadow-md hover:bg-white"><ChevronLeft size={16}/></button>
-            <button onClick={nextImg} className="p-1 bg-white/90 rounded-full shadow-md hover:bg-white"><ChevronRight size={16}/></button>
+          <div className="absolute inset-0 flex items-center justify-between px-3 opacity-0 group-hover/gallery:opacity-100 transition-all duration-300">
+            <button onClick={prevImg} className="p-1.5 bg-white/90 rounded-full shadow-xl hover:bg-emerald-500 hover:text-white transition-all transform hover:scale-110 active:scale-90">
+              <ChevronLeft size={16}/>
+            </button>
+            <button onClick={nextImg} className="p-1.5 bg-white/90 rounded-full shadow-xl hover:bg-emerald-500 hover:text-white transition-all transform hover:scale-110 active:scale-90">
+              <ChevronRight size={16}/>
+            </button>
           </div>
         )}
 
-        <div className="absolute top-3 left-3">
+        <div className="absolute top-4 left-4 z-10">
           <SourceBadge source={product.source} />
         </div>
       </div>
 
-      <div className="p-4 flex flex-col flex-grow">
-        <h3 className="text-sm font-bold text-slate-900 mb-2 line-clamp-2 min-h-[2.5rem]">
+      <div className="p-6 flex flex-col flex-grow bg-white">
+        <h3 className="text-sm font-black text-slate-900 mb-2 line-clamp-2 min-h-[2.5rem] tracking-tight leading-snug">
           {product.title}
         </h3>
 
-        <div className="flex items-center gap-1 mb-3">
-          <div className="flex text-amber-400">
-            <Star size={10} fill="currentColor" />
-          </div>
-          <span className="text-[10px] font-bold text-slate-400">{product.rating} ({product.reviews})</span>
+        <div className="flex items-center gap-1 mb-4">
+          <Star size={12} className="text-amber-400 fill-amber-400" />
+          <span className="text-[11px] font-black text-slate-400 uppercase tracking-widest">{product.rating}</span>
         </div>
 
-        {/* Descrição Expansível */}
-        <div className="mb-4">
-          <p className={`text-[11px] text-slate-500 leading-relaxed ${!isExpanded && 'line-clamp-2'}`}>
-            {product.description}
-          </p>
-          <button 
-            onClick={() => setIsExpanded(!isExpanded)}
-            className="text-[10px] font-bold text-emerald-600 mt-1 uppercase tracking-tighter"
-          >
-            {isExpanded ? 'Ver menos' : 'Ver mais'}
-          </button>
-        </div>
-
-        {/* Preço e CTA */}
-        <div className="mt-auto pt-4 border-t border-slate-50">
-          <div className="flex items-center justify-between mb-3">
-            <div>
-              {product.originalPrice && (
-                <span className="text-[10px] text-slate-400 line-through block">R$ {product.originalPrice.toFixed(2)}</span>
-              )}
-              <span className="text-lg font-black text-slate-900">R$ {product.price.toFixed(2)}</span>
-            </div>
-            <button 
-              onClick={handleShare}
-              className="p-2 text-slate-400 hover:text-emerald-500 transition-colors"
-              title="Compartilhar"
-            >
-              <Share2 size={18} />
-            </button>
+        <div className="mt-auto pt-4 border-t border-slate-50 flex items-end justify-between">
+          <div>
+            {product.originalPrice && (
+              <span className="text-[11px] text-slate-400 line-through block font-bold">R$ {product.originalPrice.toFixed(2)}</span>
+            )}
+            <span className="text-xl font-black text-slate-900 italic tracking-tighter">R$ {product.price.toFixed(2)}</span>
           </div>
           
-          <a 
-            href={product.affiliateLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full py-3 bg-slate-900 text-white rounded-xl font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-emerald-600 transition-colors shadow-lg shadow-slate-200"
-          >
-            <ShoppingCart size={14} />
-            Ir para Loja
-          </a>
+          <button className="p-3 bg-slate-900 text-white rounded-xl hover:bg-emerald-500 transition-all active:scale-90 shadow-lg shadow-slate-900/10 group-hover:shadow-emerald-500/20">
+            <ShoppingCart size={18} />
+          </button>
         </div>
       </div>
     </div>

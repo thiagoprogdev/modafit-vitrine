@@ -5,41 +5,31 @@ Sua vitrine inteligente está pronta! 🎉 O código já está no GitHub, agora 
 
 ## 🌍 Como fazer o Deploy (Site ao vivo)
 
-Siga estes passos para o seu site ganhar um link real:
-
 1. Acesse o site da [Vercel](https://vercel.com).
-2. Faça login com sua conta do **GitHub**.
-3. Clique no botão **"Add New"** e depois em **"Project"**.
-4. Você verá uma lista dos seus repositórios. Clique em **"Import"** no `modafit-vitrine`.
-5. **PASSO CRUCIAL (Configuração):**
-   - Antes de clicar em Deploy, procure a seção **"Environment Variables"**.
-   - No campo **Key**, digite: `API_KEY`
-   - No campo **Value**, cole a sua chave do Gemini.
-   - Clique em **"Add"**.
-6. Clique em **"Deploy"**.
-
-Em menos de 1 minuto, a Vercel vai te dar um link (ex: `modafit-vitrine.vercel.app`) para você colocar na sua bio do Instagram!
-
----
-
-## ✨ O que seu site tem de especial?
-
-- **Legendas com IA**: Clique em um produto e gere copies de venda instantaneamente.
-- **Busca Inteligente**: Encontre qualquer produto da Amazon apenas colando o link.
-- **Design de Elite**: Layout focado em conversão e performance.
-- **Google Search Grounding**: Preços e informações sempre atualizados via Google.
+2. Faça login com seu **GitHub**.
+3. Clique em **"Add New"** > **"Project"**.
+4. Clique em **"Import"** no repositório `modafit-vitrine`.
+5. **⚠️ Erro de "Name already used"?**
+   - Se a Vercel disser que o nome já está em uso, altere o campo **"Project Name"** para algo novo (ex: `modafit-thiago` ou `vitrine-br-fit`).
+6. **Configuração da Chave:**
+   - Em **Environment Variables**, adicione:
+     - Key: `API_KEY`
+     - Value: (Sua chave do Gemini).
+7. Clique em **Deploy**.
 
 ---
 
-## 🛠️ Comandos de Atualização (Git)
+## ✨ Recursos da sua Vitrine
 
-Sempre que você mudar algo no código aqui no VS Code, faça isso para atualizar o site:
+- **Legendas com IA**: Clique em um produto para gerar textos para redes sociais.
+- **Busca Inteligente**: Transforme qualquer nome de produto em um card de venda.
+- **Sync em Tempo Real**: Preços validados via Google Search.
 
+---
+
+## 🛠️ Como atualizar o site
+Sempre que fizer mudanças no VS Code:
 1. `git add .`
-2. `git commit -m "feat: nova funcionalidade"`
+2. `git commit -m "ajuste X"`
 3. `git push`
-
-*A Vercel vai perceber o push e atualizar seu site sozinha em segundos!*
-
----
-**Parabéns pelo progresso, Thiago! Você agora tem uma ferramenta de vendas profissional.** 🚀
+*O site atualiza sozinho em segundos!*
